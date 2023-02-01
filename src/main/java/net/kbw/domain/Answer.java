@@ -17,9 +17,22 @@ import org.springframework.data.jpa.repository.Query;
 public class Answer {
 	//
     //게시글과 N:1 관계
+	@Id
+	@GeneratedValue
+	private Long id;
+	
+	@ManyToOne
+	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
+	private User writer;
+
+	private LocalDateTime createDate; //시간
+
+	private String contents;
+
 	@ManyToOne
 	@JoinColumn(name = "fk_answer_to_question")
 	private Question question;
+
 
 	public Answer() {
 
@@ -36,18 +49,8 @@ public class Answer {
 		return this.writer.equals(SessionedUser);
 	}
 
-	@Id
-	@GeneratedValue
-	private Long id;
-
-	@ManyToOne
-	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
-	private User writer;
-
-	private LocalDateTime createDate;
-
 	
-	private String contents;
+
 
 	public String getFormatCreateDate() {
 		if (createDate == null) {

@@ -1,9 +1,14 @@
 package net.kbw.wook;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.JOptionPane;
 import javax.transaction.Transactional;
 import javax.websocket.Session;
 
@@ -36,7 +41,7 @@ public class UserController {
 	
 	@Autowired
 	private AnswerRepository answerRepository;
-	// 회원정보수정
+	// 회원정보수정화면
 	@GetMapping("/{id}/privacy")
 	public String updatemy(@PathVariable Long id, Model model, HttpSession session) {
 
@@ -46,12 +51,9 @@ public class UserController {
 
 			// 로그인이 안됐을때 로그인폼으로
 			return "/users/loginForm";
-		}
+		
 		//
-		if (!suser.matchId(id)) {
-             
-			return "redirect:/";
-
+		
 		} else {
 
 			User user = userRepository.findById(id).get();
@@ -61,61 +63,53 @@ public class UserController {
 		}
 	}
 
-	// 회원가입
+	// 회원가입페이지
 	@GetMapping("/form")
 	public String form() {
 
 		return "/user/form";
 
 	}
+	// 회원가입
+		@PostMapping("")
+		public String create(User user, HttpSession session) {
 
+			userRepository.save(user);
+
+			return "redirect:/";
+
+		}
+		
 	// 회원수정
 	@PostMapping("/{id}/update")
 	public String update(@PathVariable Long id, User newUser) {
-
 		System.out.println(id);
-
 		User user = userRepository.findById(id).get();
 		user.update(newUser);
 		userRepository.save(user);
 		return "redirect:/";
-
 	}
-
 	// 회원탈퇴
-	
 	@GetMapping("/{id}/delete")
 	@Transactional
 	public String delete(@PathVariable Long id, HttpSession session) {
-
 		User user = userRepository.findById(id).get();
-
 		//회원탈퇴시 회원이 쓴글,댓글을 삭제하는 코드 
-		
 		List<Question> question= questionRepository.findBywriter_id(id);
-		
 		List<Answer> answer= answerRepository.findBywriter_id(id);
-		
-		
 	for (int i=1; i<=question.size(); i++) {
-		
+		//회원이 쓴 게시글 삭제
 		questionRepository.deleteBywriter_id(id);
 	}
-	
-	for (int i=1; i<=answer.size(); i++) {
-		
+	for (int i=1; i<=answer.size(); i++) {	
+		//회원이 쓴 게시글 댓글
 		answerRepository.deleteBywriter_id(id);
 	}
-		
-		
 	//회원탈퇴	
 	userRepository.deleteById(id);
 	session.removeAttribute(HttpSessionUtils.USER_SESSION_KEY);
-
 		return "redirect:/";
 		
-		
-
 	}
 
 	// 로그인페이지
@@ -128,34 +122,43 @@ public class UserController {
 
 	// 로그인 백엔드
 	@PostMapping("/login")
-	public String login(String userId, String password, HttpSession session ,Model model) {
-
+	public String login(String userId, String password, HttpSession session ,Model model ,HttpServletResponse response) throws IOException {
 		User user = userRepository.findByUserId(userId);
+		
 
 		// 로그인시 아이디가 일치하지 않을때.
-		if (user == null) {
+	if (user == null) {
+		
+		response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('아이디가 없습니다.'); history.go(-1);</script>");
+        out.flush(); 
 			return "redirect:/users/loginForm";
-
 		}
 
 		// 아이디는 일치하지만 비밀번호가 틀릴때
 		if (!user.matchPassword(password)) {
 			
-			
-			  String discord ="아이디가 없2습니다";
-			   System.out.println(discord);
-				model.addAttribute("discord",discord);
+			  response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
+	            out.flush(); 
 				return "redirect:/users/loginForm";
 
 		}
-
-		// 로그인 성공후 세션담기
+		
+	
+	
+     	// 로그인 성공후 세션담기
 		session.setAttribute(HttpSessionUtils.USER_SESSION_KEY, user);
 		return "redirect:/";
+		
 
 	}
+	
+	
 
-	//
+	
 	// 로그아웃
 	@GetMapping("/logout")
 
@@ -168,29 +171,7 @@ public class UserController {
 
 	}
 
-	// 회원가입
-	@PostMapping("")
-	public String create(User user, HttpSession session) {
-
-		userRepository.save(user);
-
-		return "redirect:/";
-
-	}
-
-	// 회원목록
-	@GetMapping("")
-
-	public String list(Model model) {
-
-		List<User> users = userRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
-
-		model.addAttribute("users", users);
-
-		return "/user/list";
-
-	}
-
+	
 	//아이디 중복
 	@ResponseBody
 	@GetMapping("/idcheck")

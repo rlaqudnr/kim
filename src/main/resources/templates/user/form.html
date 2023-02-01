@@ -14,8 +14,7 @@
 </head>
 <body>
 {{>include/navagation}}
-
-	<!-- 회원가입-->
+<!-- 회원가입-->
 	<div class="container" id="main">
 		<div class="col-md-6 col-md-offset-3">
 			<div class="panel panel-default content-main">
@@ -25,15 +24,17 @@
 							id="userId" name="userId" placeholder="User ID"
 							required="required">
 
-						<button id="overlappedID" type="button">중복확인</button>
+						<!--  <button id="overlappedID" type="button">중복확인</button>-->
 
-						<span id="olmessage"></span>
+						<h7 id="olmessage"></h7>
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label> <input type="password"
 							class="form-control" id="password" name="password"
 							placeholder="Password" required="required">
+							<h7 id="passwordMs"></h7>
 					</div>
+					
 					<div class="form-group">
 						<label for="name">이름</label> <input class="form-control" id="name"
 							name="name" placeholder="Name" required="required">
@@ -47,7 +48,6 @@
 						id="signup">회원가입</button>
 
 					<div class="clearfix" />
-
 				</form>
 			</div>
 		</div>

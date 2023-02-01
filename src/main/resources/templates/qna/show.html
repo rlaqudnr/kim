@@ -15,11 +15,9 @@
 </head>
 <body>
 	{{>include/navagation}}
-
 	<!-- 글 상세보기 -->
 	<div class="container" id="main">
 		<div class="col-md-12 col-sm-12 col-lg-12">
-		
 			{{#question}}
 			<div class="panel panel-default">
 				<header class="qna-header">
@@ -35,8 +33,7 @@
 									class="article-author-thumb" alt="">
 							</div>
 							<div class="article-header-text">
-								<a href="/users/92/kimmunsu" class="article-author-name">{{writer.userId}}
-
+								<a href="#" class="article-author-name">{{writer.userId}}
 
 								</a> <span class="article-header-time" title="퍼머링크">
 									{{formatCreateDate}} <i class="icon-link"></i> <svg
@@ -44,19 +41,14 @@
 										fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
   <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
   <path
-											d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+							d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
 </svg>{{view}}
 								</span>
-
 							</div>
 						</div>
 						<div class="article-doc">{{contents}}</div>
 						<div class="article-util">
 							<ul class="article-util-list">
-
-
-
-
 								<a class="link-modify-article" href="/questions/{{id}}/update">수정</a>
 
                              <input type="text" id="id" value="{{id}}" hidden>
@@ -66,15 +58,9 @@
 									<input type="hidden" name="_method" value="DELETE">
 
 									<button class="link-delete-article" type="submit" id="delete" >삭제</button>
-
-
 								</form>
-
-
 								<a class="link-modify-article" href="/">목록</a>
-
 							</ul>
-
 						</div>
 						<div style="text-align: center;">
 							<form action="/questions/{{id}}/hit" method="get">
@@ -86,9 +72,9 @@
 						<div class="qna-comment">
 							<div class="qna-comment-slipp">
 								<p class="qna-comment-count">댓글:{{reply}}개</p>
+								<!-- 댓글리스트  -->
 								<div class="qna-comment-slipp-articles">
 									{{#answers}}
-
 									<article class="article" id="answer-1405">
 										<div class="article-header">
 											<div class="article-header-thumb">
@@ -97,7 +83,7 @@
 													class="article-author-thumb" alt="">
 											</div>
 											<div class="article-header-text">
-												<a href="/users/1/자바지기" class="article-author-name">{{writer.userId}}</a>
+												<a href="#" class="article-author-name">{{writer.userId}}</a>
 												<span class="article-header-time" title="퍼머링크">
 													{{formatCreateDate}} <i class="icon-link"></i>
 												</span>
@@ -109,16 +95,13 @@
 										<div class="article-util">
 											<ul class="article-util-list">
 
-
 												<a class="link-modify-article"
-													href="/questions/{{id}}/answers/updateform/{{question.id}}">수정</a>
-
-
+													href="/questions/{{id}}/answers/updateform/{{question.id}}">수정</a> <!-- 댓글 수정 후 다시 게시물로 돌아가기 위해 question.id(게시물 id)를 같이넘겨줌 -->
 
 												<form class="delete-answer-form"
-													action="/questions/{{id}}/answers/delete/{{question.id}}" method="get">
+													action="/questions/{{id}}/answers/delete/{{question.id}}" method="get"> <!-- 댓글 삭제 후 다시 게시물로 돌아가기 위해 question.id(게시물 id)를 같이넘겨줌 -->
 													<input type="hidden" name="_method" value="DELETE">
-													<button type="submit" class="delete-answer-button">삭제</button>
+													<button type="submit" class="delete-answer-button">삭제</button> 
 												</form>
 
 											</ul>
@@ -130,6 +113,7 @@
 
 
 
+                                   <!-- 댓글 작성 -->
 
 									<form class="submit-write" method="get"
 										action="/questions/{{id}}/answers/create">

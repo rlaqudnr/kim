@@ -33,9 +33,6 @@ public class Question {
 	@Column(columnDefinition = "integer default 0", nullable = false)
 	private int view;
 
-	@Column(columnDefinition = "integer default 0", nullable = false)
-	private int hit;
-
 	//댓글과 1:N 관계
 	@OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
 	@OrderBy("id DESC")
@@ -43,7 +40,6 @@ public class Question {
 
 	private int reply;
 
-	
 	private String title;
 	@Lob
 	private String contents;
@@ -61,9 +57,16 @@ public class Question {
 		this.createDate = LocalDateTime.now();
 	}
 
-	public boolean isSameWriter(User sessionedUser) {
-		return this.writer.equals(sessionedUser);
+	
+	//
+	public boolean isSameWriter(User suser) {
+		
+		//로그인을 했으면 작성자 삭제,수정시 본인확인을 해야함
+		//현재 로그인한 id와 작성자를 비교
+		return this.writer.equals(suser);
+		
 	}
+	
 	//
 	@Override
 	public int hashCode() {
@@ -107,16 +110,16 @@ public class Question {
 
 	public void update() {
 
-		this.reply = answers.size();
+	
 
 		this.view++;
+		
+		this.reply = answers.size();   //게시물의 댓글수를 가져온다. 
+		                              // question은 게시물 조회시  최초 발동이 되는데 
+		                               //answer랑 N대1 관계기 때문에 question이 실행되면 answer가 만들어지고 question기본키로 
+		                               //answer 외래키를 조회하여 같은 게시물 번호를 찾아주고 size()메소드를 쓰면 몇개인지 가져온다
 
 	}
 
-	public void hit() {
-
-		this.hit++;
-
-	}
-
+	
 }

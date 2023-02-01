@@ -15,12 +15,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long>{
 	
 	Page<Question> findByTitleContaining(String keyword, Pageable pageable); //검색 후 페이징
 
-	
-
 
 	List<Question> findBywriter_id(Long id); // 탈퇴하려는 사용자의 게시물을 검색
-
-
 
 
 	void deleteBywriter_id(Long id); // 게시물 삭제

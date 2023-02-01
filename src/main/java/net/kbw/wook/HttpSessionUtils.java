@@ -14,7 +14,7 @@ public class HttpSessionUtils {
 	public static boolean isLoginUser(HttpSession session) {
 
 		//로그인 여부 확인 
-		Object suser = session.getAttribute(USER_SESSION_KEY);
+		Object suser = session.getAttribute(USER_SESSION_KEY); //세션에 값이 있는지 확인후 리턴
 		if (suser == null) {
 
 			return false;
@@ -30,6 +30,8 @@ public class HttpSessionUtils {
 		}
 
 		return (User) session.getAttribute(USER_SESSION_KEY);
+		
+		
 
 	}
 
