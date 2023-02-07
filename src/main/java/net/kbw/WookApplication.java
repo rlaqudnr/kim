@@ -7,18 +7,11 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class WookApplication  extends SpringBootServletInitializer{
+public class WookApplication  {
 	
 	
 	
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-		// TODO Auto-generated method stub
-		return builder.sources(WookApplication.class);
-		
-		//
-		
-	}
+	
 
 	public static void main(String[] args) {
 		
