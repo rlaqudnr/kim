@@ -38,7 +38,7 @@ public class QuestionController {
 		question.update(); //게시글믈 보게된다면. update 함수를 실행시켜 view를 1 증가 시킨다. //댓글수도 가지고옴
 		questionRepository.save(question);
 		model.addAttribute("question", question);
-		return "/qna/show";
+		return "qna/show";
 	}
 //글 수정하기 화면
 	@GetMapping("/{id}/update")
@@ -55,7 +55,7 @@ public class QuestionController {
 	        out.flush(); 
 	        
 			model.addAttribute("question", question);
-			return "/users/loginForm";
+			return "users/loginForm";
 
 		}
 		// 로그인은 했으나 작성자가 아닐때 수정,삭제를 못하게함
@@ -67,12 +67,12 @@ public class QuestionController {
 	        
 
 			model.addAttribute("question", question);
-			return "/users/loginForm";
+			return "users/loginForm";
 
 		}
 		question = questionRepository.findById(id).get();
 		model.addAttribute("question", question);
-		return "/qna/updateform";
+		return "qna/updateform";
 	}
 //글 수정하기 
 	@PostMapping("/{id}")
@@ -98,7 +98,7 @@ public class QuestionController {
 	        
 			
 			model.addAttribute("question", question);
-			return "/users/loginForm";
+			return "users/loginForm";
 
 		}
 		// 로그인은 했으나 작성자가 아닐때 수정,삭제를 못하게함
@@ -108,7 +108,7 @@ public class QuestionController {
 	        out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>");
 	        out.flush(); 
 			model.addAttribute("question", question);
-			return "/users/loginForm";
+			return "users/loginForm";
 		}
 		
 		
@@ -140,10 +140,10 @@ public class QuestionController {
 
 			//model.addAttribute(HttpSessionUtils.isLoginUser(session));
 
-			return "/users/loginForm";
+			return "users/loginForm";
 		}
 
-		return "/qna/form";
+		return "qna/form";
 	}
 	// 글쓰기
 	@PostMapping("")

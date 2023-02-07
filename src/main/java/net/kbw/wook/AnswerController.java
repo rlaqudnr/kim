@@ -88,7 +88,7 @@ public class AnswerController {
 	        out.flush(); 
 	        
 			// 로그인이 안됐을때 로그인폼으로
-			return "/users/loginForm";
+			return "users/loginForm";
 		}
 		
 
@@ -100,12 +100,12 @@ public class AnswerController {
 	        out.println("<script>alert('권한이 없습니다.'); history.go(-1);</script>");
 	        out.flush(); 
 	        
-			return "/users/loginForm";
+			return "users/loginForm";
 
 		}
 		model.addAttribute("answers", answerRepository.findById(questionId).get());
 
-		return "/qna/AnswerForm";
+		return "qna/AnswerForm";
 
 	}
 
@@ -124,7 +124,7 @@ public class AnswerController {
 	        out.flush(); 
 	        
 			
-			return "/users/loginForm";
+			return "users/loginForm";
 		}
 
 		// 로그인은 했으나 작성자가 아닐때 수정,삭제를 못하게함
@@ -136,7 +136,7 @@ public class AnswerController {
 	        out.flush(); 
 	        
 
-			return "/users/loginForm";
+			return "users/loginForm";
 
 		}
          

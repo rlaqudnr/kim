@@ -28,7 +28,7 @@ public class Question {
 	@ManyToOne
 	private User writer;
 
-//	private LocalDateTime createDate;
+	private LocalDateTime createDate;
 
 	@Column(columnDefinition = "integer default 0", nullable = false)
 	private int view;
@@ -54,7 +54,7 @@ public class Question {
 		this.writer = writer;
 		this.title = title;
 		this.contents = contents;
-		//this.createDate = LocalDateTime.now();
+		this.createDate = LocalDateTime.now();
 	}
 
 	
@@ -94,13 +94,13 @@ public class Question {
 		return true;
 	}
 
-//	public String getFormatCreateDate() {
-//		if (createDate == null) {
-//			return "";
-//		}
+	public String getFormatCreateDate() {
+		if (createDate == null) {
+			return "";
+		}
 
-//		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
-//	}
+		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+	}
 
 	public void update(String title, String contents) {
 		// TODO Auto-generated method stub

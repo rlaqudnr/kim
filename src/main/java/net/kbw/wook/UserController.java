@@ -50,7 +50,7 @@ public class UserController {
 		if (!HttpSessionUtils.isLoginUser(session)) {
 
 			// 로그인이 안됐을때 로그인폼으로
-			return "/users/loginForm";
+			return "users/loginForm";
 		
 		//
 		
@@ -59,7 +59,7 @@ public class UserController {
 			User user = userRepository.findById(id).get();
 
 			model.addAttribute("user", user);
-			return "/user/privacy";
+			return "user/privacy";
 		}
 	}
 
@@ -67,7 +67,7 @@ public class UserController {
 	@GetMapping("/form")
 	public String form() {
 
-		return "/user/form";
+		return "user/form";
 
 	}
 	// 회원가입
@@ -116,7 +116,7 @@ public class UserController {
 	@GetMapping("/loginForm")
 	public String loginForm() {
 
-		return "/user/login";
+		return "user/login";
 
 	}
 

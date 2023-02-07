@@ -37,9 +37,9 @@ public class HomeController {
 			model.addAttribute("question", question); //게시글 제목 날짜 조회수 ..
 			//검색을 했는데 값이 없을때 일반 페이징
 			if (question.getTotalPages() == 0) {
-				return "/user/index";
+				return "user/index";
 			}
-			return "/user/index";
+			return "user/index";
 			//검색을 하지 않았을때. 일반 페이징 화면을 보여준다
 		} else {
 			Page<Question> question = questionRepository.findAll(pageable);
@@ -50,7 +50,7 @@ public class HomeController {
 			model.addAttribute("hasPrev", question.hasPrevious());
 			keyword = "";
 			model.addAttribute("keyword", keyword);
-			return "/user/index";
+			return "user/index";
 
 		}
 
