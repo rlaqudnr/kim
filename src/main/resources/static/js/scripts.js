@@ -2,7 +2,7 @@ var over;
 $("#userId").keyup(function() {
 	const id = $("#userId").val();
 	$.ajax({
-		type: "post",
+		type: "get",
 		async: false,
 		url: "http://localhost:8080/users/idcheck",
 		data: { id: id },
