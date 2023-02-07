@@ -25,7 +25,7 @@ public class Answer {
 	@JoinColumn(foreignKey = @ForeignKey(name = "fk_answer_writer"))
 	private User writer;
 
-	private LocalDateTime createDate; //시간
+	//private LocalDateTime createDate; //시간
 
 	private String contents;
 
@@ -42,7 +42,7 @@ public class Answer {
 		this.question = question;
 		this.writer = writer;
 		this.contents = contents;
-		this.createDate = LocalDateTime.now();
+		//this.createDate = LocalDateTime.now();
 	}
 
 	public boolean isSameWriter(User SessionedUser) {
@@ -52,13 +52,13 @@ public class Answer {
 	
 
 
-	public String getFormatCreateDate() {
-		if (createDate == null) {
-			return "";
-		}
+	//public String getFormatCreateDate() {
+		//if (createDate == null) {
+		//	return "";
+		//}
 
-		return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
-	}
+	//	return createDate.format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+	//}
 
 	@Override
 	public int hashCode() {
