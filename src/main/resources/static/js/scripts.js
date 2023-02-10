@@ -6,7 +6,7 @@ $("#userId").keyup(function() {
 	$.ajax({
 		type: "get",
 		async: false,
-		url: "www.wook2.com:80/users/idcheck",
+		url: "http://www.wook2.com:80/users/idcheck",
 		data: { id: id },
 		success: function(data) {
 			if (data == 1) {			
