@@ -6,7 +6,7 @@ $("#userId").keyup(function() {
 	$.ajax({
 		type: "get",
 		async: false,
-		url: "http://localhost:8080/users/idcheck",
+		url: "http://ec2-3-39-201-37.ap-northeast-2.compute.amazonaws.com:80/users/idcheck",
 		data: { id: id },
 		success: function(data) {
 			if (data == 1) {			
