@@ -18,6 +18,7 @@ $("#userId").keyup(function() {
 
 				$("#olmessage").addClass("olmessagef");
 				$("#olmessage").removeClass("olmessaget");
+				
 			} else {
 				$("#olmessage").text("사용 가능한 ID 입니다.");
 				$("#olmessage").addClass("olmessaget");
@@ -27,6 +28,9 @@ $("#userId").keyup(function() {
 		}
 	})
 });
+
+
+
 
 $("#password").keyup(function() { // 
 	const pw = $("#password").val();
@@ -42,7 +46,7 @@ $("#password").keyup(function() { //
 		$("#passwordMs").text("사용가능한 비밀번호 입니다");
 		$("#passwordMs").addClass("olmessagef");
 		$("#passwordMs").removeClass("olmessaget");
-		$("#signup").attr("type", "submit");
+		$("#signup").attr("type", "button");
 	}
 
 });

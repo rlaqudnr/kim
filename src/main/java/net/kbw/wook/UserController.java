@@ -174,7 +174,7 @@ public class UserController {
 
 	
 	//아이디 중복
-	@CrossOrigin
+	
 	@ResponseBody
 	@GetMapping("/idcheck")
 

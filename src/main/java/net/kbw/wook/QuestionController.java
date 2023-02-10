@@ -157,23 +157,7 @@ public class QuestionController {
 
 	}
 	
-	@GetMapping("/hitcheck/{userId}/{id}")
-	public String hitcheck(@PathVariable String userId, @PathVariable Long id) {
-
-		
-		
-		
-		System.out.println(userId);
-		System.out.println(id);
-		
-		
-//		User sessionUser = HttpSessionUtils.getUserFromSession(session);
-//		Question newQuestion = new Question(sessionUser, title, contents);
-//		questionRepository.save(newQuestion);
-
-		return "redirect:/";
-
-	}
+	
 
 	
 	
