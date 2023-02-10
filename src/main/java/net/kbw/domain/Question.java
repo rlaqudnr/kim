@@ -43,6 +43,17 @@ public class Question {
 	private String title;
 	@Lob
 	private String contents;
+	
+	public int getHit() {
+		return hit;
+	}
+
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
+	@Column(columnDefinition = "integer default 0", nullable = false)
+	private int hit;
+	
 
 	public Question() {
 
