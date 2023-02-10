@@ -4,34 +4,27 @@ var over;
 $("#userId").keyup(function() {
 	const id = $("#userId").val();
 	$.ajax({
-		
-		
-		
 		type: "get",
 		async: false,
-		url: "http://ec2-3-39-201-37.ap-northeast-2.compute.amazonaws.com:80/users/idcheck",
+		url: "http://localhost:8080/users/idcheck",
 		data: { id: id },
 		success: function(data) {
-			if (data == 1) {
-				$("#signup").attr("type", "button");
+			if (data == 1) {			
 				$("#olmessage").text("이미 사용중인 ID 입니다.");
 
 				$("#olmessage").addClass("olmessagef");
 				$("#olmessage").removeClass("olmessaget");
+				$("#signup").attr("type", "button");
 				
 			} else {
 				$("#olmessage").text("사용 가능한 ID 입니다.");
 				$("#olmessage").addClass("olmessaget");
 				$("#olmessage").removeClass("olmessagef");
-				$("#signup").attr("type", "submit");
+				$("#signup").attr("type", "submit");				
 			}
 		}
 	})
 });
-
-
-
-
 $("#password").keyup(function() { // 
 	const pw = $("#password").val();
 
@@ -46,27 +39,40 @@ $("#password").keyup(function() { //
 		$("#passwordMs").text("사용가능한 비밀번호 입니다");
 		$("#passwordMs").addClass("olmessagef");
 		$("#passwordMs").removeClass("olmessaget");
-		$("#signup").attr("type", "button");
-	}
+		
+		var a = $("#olmessage").text();
+		
+		var b =	"이미 사용중인 ID 입니다.";
+		
+		if(a==b){
+			
+			$("#signup").attr("type", "button");
+		}else{
+			$("#signup").attr("type", "submit");
+		}
+}
+});
+		
 
+
+
+
+
+
+
+
+$("#emails").keyup(function() { // 
+
+		$("#signup").attr("type", "submit");
+	
 });
 
-$("#email").keyup(function() { // 
-	
+
+$("#names").keyup(function() { 
 		$("#signup").attr("type", "submit");
 	
 
 });
-
-
-
-$("#name").keyup(function() { // 
-	
-		$("#signup").attr("type", "submit");
-	
-
-});
-
 
 
 
