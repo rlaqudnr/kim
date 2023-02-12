@@ -6,8 +6,9 @@ $("#userId").keyup(function() {
 	$.ajax({
 		type: "get",
 		async: false,
-		url: "https://wook2.com:80/users/idcheck",
+		url: "https://wook2.com/users/idcheck",
 		data: { id: id },
+		dataType:"jsonp",
 		success: function(data) {
 			if (data == 1) {			
 				$("#olmessage").text("이미 사용중인 ID 입니다.");
