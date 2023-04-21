@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +44,7 @@ public class AnswerController {
 	        out.println("<script>alert('로그인을 해주세요.'); history.go(-1);</script>");
 	        out.flush(); 
 	        
-			return "redirect:/users/loginForm";
+	        return "users/loginForm";
 		}
 		//
 		User loginUser = HttpSessionUtils.getUserFromSession(session);    //현재 로그인한 id를 loginUser 에 넣어준다.
@@ -127,6 +128,7 @@ public class AnswerController {
 			return "users/loginForm";
 		}
 
+		
 		// 로그인은 했으나 작성자가 아닐때 수정,삭제를 못하게함
 		if (!answer.isSameWriter(suser)) {
 			
@@ -149,4 +151,7 @@ public class AnswerController {
 		return "redirect:/questions/{id}";
 
 	}
+	
+	
+	
 }

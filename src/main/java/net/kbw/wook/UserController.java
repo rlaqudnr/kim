@@ -134,7 +134,8 @@ public class UserController {
         PrintWriter out = response.getWriter();
         out.println("<script>alert('아이디가 없습니다.'); history.go(-1);</script>");
         out.flush(); 
-			return "redirect:/users/loginForm";
+			//return "redirect:/users/loginForm";
+        return "users/loginForm";
 		}
 
 		// 아이디는 일치하지만 비밀번호가 틀릴때
@@ -144,7 +145,7 @@ public class UserController {
 	            PrintWriter out = response.getWriter();
 	            out.println("<script>alert('비밀번호가 일치하지 않습니다.'); history.go(-1);</script>");
 	            out.flush(); 
-				return "redirect:/users/loginForm";
+				return "users/loginForm";
 
 		}
 		
